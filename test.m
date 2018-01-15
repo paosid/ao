@@ -101,122 +101,108 @@ global object;
 object.changeToBw();
 imshow(object.currentIm,'Parent',handles.axes1);
 
+% metoda obs³uguj¹ca klawisz removeHighFreButton
+function removeHighFreButton_Callback(hObject, eventdata, handles)
+    global object;
+    object.removeHighFre();
+    imshow(object.currentIm,'Parent',handles.axes1);
+    
+% metoda obs³uguj¹ca klawisz removeLowFreButton
+function removeLowFreButton_Callback(hObject, eventdata, handles)
+    global object;
+    object.removeLowFre();
+    imshow(object.currentIm,'Parent',handles.axes1);
 
-% --- Executes on slider movement.
+% metoda obs³uguj¹ca klawisz motionBlur
+function motionBlurButton_Callback(hObject, eventdata, handles)
+    global object;
+    object.motionBlur();
+    imshow(object.currentIm,'Parent',handles.axes1);
+    
+% metoda obs³uguj¹ca klawisz modfiltr
+function medfiltrButton_Callback(hObject, eventdata, handles)
+    global object;
+    object.medfiltr();
+    imshow(object.currentIm,'Parent',handles.axes1);
+    
+% metoda obs³uguj¹ca klawisz erose
+function eroseButton_Callback(hObject, eventdata, handles)
+    global object;
+    sliderVal = get(handles.EroseSlider, 'Value');
+    sliderVal = int8(sliderVal);
+    object.erose(sliderVal);
+    imshow(object.currentIm,'Parent',handles.axes1);
+    
+% metoda obs³uguj¹ca klawisz dilate
+function dilateButton_Callback(hObject, eventdata, handles)
+global object;
+    sliderVal = get(handles.DilateSlider, 'Value');
+    sliderVal = int8(sliderVal);
+    object.dilate(sliderVal);
+    imshow(object.currentIm,'Parent',handles.axes1);
+
+% metoda obs³uguj¹ca klawisz showEdges
+function showEdgesButton_Callback(hObject, eventdata, handles)
+    global object;
+    object.showEdges();
+    imshow(object.currentIm,'Parent',handles.axes1);
+ 
+% metoda obs³uguj¹ca przywracanie obrazu do stanu pocz¹tkowego
+function przywroc_Callback(hObject, eventdata, handles)
+global object;
+object.setOriginal();
+imshow(object.currentIm,'Parent',handles.axes1);
+
+% metoda obs³uguj¹ca slider ChangeContrast
 function ChangeContrastSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to ChangeContrastSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
 
 % --- Executes during object creation, after setting all properties.
 function ChangeContrastSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to ChangeContrastSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
-
-% metoda obs³uguj¹ca przywracanie obrazu do stanu pocz¹tkowego
-function przywroc_Callback(hObject, eventdata, handles)
-global object;
-global object2;
-object=object2;
-
-imshow(object.currentIm,'Parent',handles.axes1);
-
-
-% --- Executes on slider movement.
+% metoda obs³uguj¹ca slider makeLighter
 function makeLighterSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to makeLighterSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 
 % --- Executes during object creation, after setting all properties.
 function makeLighterSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to makeLighterSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
 
-% --- Executes on slider movement.
+% % metoda obs³uguj¹ca slider changeCorelation
 function changeCorelationSlider_Callback(hObject, eventdata, handles)
-% hObject    handle to changeCorelationSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 
 % --- Executes during object creation, after setting all properties.
 function changeCorelationSlider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to changeCorelationSlider (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
 
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
 
-% --- Executes on button press in pushbutton10.
-function pushbutton10_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton10 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton11.
-function pushbutton11_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton11 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton12.
-function pushbutton12_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton12 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton13.
-function pushbutton13_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton13 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton14.
-function pushbutton14_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton14 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton15.
-function pushbutton15_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton15 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+
+
+
+
+
 
 
 % --- Executes on slider movement.
@@ -254,6 +240,50 @@ function changeGradientSlider2_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function changeGradientSlider2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to changeGradientSlider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function EroseSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to EroseSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function EroseSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to EroseSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function DilateSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to DilateSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function DilateSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to DilateSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

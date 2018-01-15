@@ -55,7 +55,12 @@ classdef PraseImage < handle
             plot(obj.xPlot,obj.yPlot);
             axis([0,1,0,1])
             obj.ploted = 0;
-        end      
+        end   
+        % set default image
+        function obj = setOriginal(obj)
+            obj.currentIm = obj.originalIm;
+        end
+        
         % changing brightness
         function obj = makeLighter(obj,number)
             if (obj.bw && obj.lastOperation == 'w')
