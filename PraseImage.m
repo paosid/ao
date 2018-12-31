@@ -1,55 +1,62 @@
-classdef PraseImage
+classdef PraseImage < handle
     properties
         bw
+        bin
         originalIm
         bwIm
         binIm
         currentIm
-        histogram
     end
     methods 
         function obj = PraseImage()
             obj.bw=false;
         end
-        function obj = showHist()
-            if (histogram)
-                obj.histogram = imhist(currentIm);
-            end
+        function obj = readIm(obj)
+            obj.originalIm = double (imread('kaczki.jpg'))/255;
+            obj.currentIm = obj.originalIm;
         end
-        function obj = readIm(nameOfFile)
-            obj.originalIm = double (imread(nameOfFile))/255;
-        end
-        function obj = changeToBin()
-            obj.bwIm = rgb2gray(imToBin);
+        function obj = changeToBw(obj)
+            obj.bwIm = rgb2gray(obj.originalIm);
             obj.bw = true;
+            obj.currentIm = obj.bwIm;
         end
-        function obj = makeLighter(number)
-            if (bw)
-                obj.currentIm = bwIm + number;
+        function obj = makeLighter(obj,number)
+            if (obj.bw)
+                obj.currentIm = obj.bwIm + number;
             end
         end
-        function obj = changeContrast(number)
-            if (bw)
-                obj.currentIm = bwIm + number;
+        function obj = changeContrast(obj,number)
+            if (obj.bw)
+                obj.currentIm = obj.bwIm * number;
             end
         end
-        function obj = changeCorelation(number)
-            if (bw)
-                obj.currentIm = bwIm.^number;
+        function obj = changeCorelation(obj,number)
+            if (obj.bw)
+                obj.currentIm = obj.bwIm.^number;
             end
         end
-        function obj = bwOtsu()
-            if (bw)
+        function obj = binOtsu(obj)
+            if (obj.bw)
                 T = graythresh(obj.bwIm);
-                obj.bwIm(obj.bwIm>T) = 1;
-                obj.bwIm(obj.bwIm<T) = 0;
+                obj.binIm = obj.bwIm;
+                obj.binIm(obj.binIm>T) = 1;
+                obj.binIm(obj.binIm<T) = 0;
+                obj.bin = true;
+                obj.currentIm = obj.binIm;
             end
         end
-        function obj = gradient()
+        function obj = gradient(obj, start_value,end_value, mode)
             [h,w,z] = size(obj.originalIm);
-            m = linspace(0,1,w);
+            m = linspace(start_value,end_value,w);
             m = repmat(m,[h,1,3]);
-            obj.currentIm = obj.originalIm.*m;
+            switch (mode)
+                case 'bw'
+                    obj.currentIm = obj.bwIm.*m;a
+                case 'bin'
+                    obj.currentIm = obj.binIm.*m;
+                otherwise
+                    obj.currentIm = obj.originalIm.*m;
+            end
         end
     end
 end
