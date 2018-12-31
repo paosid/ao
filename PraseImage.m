@@ -9,7 +9,8 @@ classdef PraseImage < handle
     end
     methods 
         function obj = PraseImage()
-            obj.bw=false;
+            obj.bw = false;
+            obj.bin = false;
         end
         function obj = readIm(obj)
             obj.originalIm = double (imread('kaczki.jpg'))/255;
