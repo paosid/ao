@@ -40,10 +40,13 @@ function wczytajButton_Callback(hObject, eventdata, handles)
                  '*.tif','Tagged Image File (*.tif,)';...
                  '*.*','All files (*.*)'});
 global object;
+global object2
 object = PraseImage;
 object.bw;
 object.readIm([p,f]);
+object2 = object;
 imshow(object.currentIm,'Parent',handles.axes1);
+imshow(object2.currentIm,'Parent',handles.axes2);
 
 
 %metoda obs³uguj¹ca klawisz "makeLighter"
@@ -114,3 +117,11 @@ function ChangeContrastSlider_CreateFcn(hObject, eventdata, handles)
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
+
+
+% metoda obs³uguj¹ca przywracanie obrazu do stanu pocz¹tkowego
+function przywroc_Callback(hObject, eventdata, handles)
+global object;
+global object2;
+object = object2;
+imshow(object2.currentIm,'Parent',handles.axes1);
