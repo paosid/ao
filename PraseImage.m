@@ -1,6 +1,9 @@
 classdef PraseImage < handle
     properties
         bw          % says if pic is black and white
+        xPlot
+        yPlot
+        ploted
         bin         % says if pic is binary
         originalIm  % variable that remember look of original pic
         bwIm        % black&white image
@@ -22,7 +25,6 @@ classdef PraseImage < handle
             obj.currentIm = obj.originalIm;
             obj.lastOperation = 'o';
         end
-
         % changes the original image to black&white
         function obj = changeToBw(obj)
             obj.bwIm = rgb2gray(obj.originalIm);
@@ -30,6 +32,30 @@ classdef PraseImage < handle
             obj.currentIm = obj.bwIm;
             obj.lastOperation = 'w';
         end
+        % shows transformation chart, has three modes:
+                                                % 1 - add 
+                                                % 2 - multiplication
+                                                % 3 - exponentiation
+        function obj = transformationChart(obj,mode, number)
+            if (obj.ploted)
+                obj.xPlot = linspace(0,1,256);
+            end
+            switch (mode)
+                case 1
+                    obj.yPlot=obj.xPlot+number;
+                case 2
+                    obj.yPlot=obj.xPlot*number;
+                otherwise
+                    obj.yPlot=obj.xPlot.^number;
+            end
+            obj.currentIm(obj.currentIm>1) = 1;
+            obj.currentIm(obj.currentIm<0) = 0;
+            obj.yPlot(obj.yPlot>1) = 1;
+            obj.yPlot(obj.yPlot<0) = 0;
+            plot(obj.xPlot,obj.yPlot);
+            axis([0,1,0,1])
+            obj.ploted = 0;
+        end      
         % changing brightness
         function obj = makeLighter(obj,number)
             if (obj.bw && obj.lastOperation == 'w')
@@ -107,18 +133,18 @@ classdef PraseImage < handle
            end
        end
        function obj = erose(obj, number)
-           if (obj.bw && obj.lastOperation == 'b')
+           if (obj.bin && obj.lastOperation == 'b')
                obj.currentIm = imerode(obj.currentIm,ones(number));
            end
        end
        function obj = dilate(obj,number)
-           if (obj.bw && obj.lastOperation == 'b')
+           if (obj.bin && obj.lastOperation == 'b')
                obj.currentIm = imdilate(obj.currentIm, ones(number));
            end
        end
        %shows the edges of objects
        function obj = showEdges(obj)
-           if (obj.bw && obj.lastOperation == 'b')
+           if (obj.bin && obj.lastOperation == 'b')
                 obj.currentIm = obj.currentIm - imerode(obj.binIm,ones(3));
            end
        end
