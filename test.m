@@ -53,15 +53,17 @@ imshow(object.currentIm,'Parent',handles.axes2);
 function makeLighterButton_Callback(hObject, eventdata, handles)
 
 global object;
-object.makeLighter(0.5);
+sliderVal = get(handles.makeLighterSlider, 'Value');
+object.makeLighter(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
 
 
-% --- Executes on button press in changeContrastButton.
+%metoda obs³uguj¹ca klawisz "changeContrast"ngeC
 function changeContrastButton_Callback(hObject, eventdata, handles)
-%metoda obs³uguj¹ca klawisz "changeContrast"
+
 global object;
-object.changeContrast(3);
+sliderVal = get(handles.ChangeContrastSlider, 'Value');
+object.changeContrast(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
 
 
@@ -69,7 +71,8 @@ imshow(object.currentIm,'Parent',handles.axes1);
 function changeCorelationButton_Callback(hObject, eventdata, handles)
 
 global object;
-object.changeCorelation(2.1);
+sliderVal = get(handles.changeCorelationSlider, 'Value');
+object.changeCorelation(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
 
 
@@ -85,7 +88,9 @@ imshow(object.currentIm,'Parent',handles.axes1);
 function gradientButton_Callback(hObject, eventdata, handles)
 
 global object;
-object.gradient(0.1, 1.4,'o');
+sliderVal1 = get(handles.changeGradientSlider1, 'Value');
+sliderVal2 = get(handles.changeGradientSlider2, 'Value');
+object.gradient(sliderVal1, sliderVal2);
 imshow(object.currentIm,'Parent',handles.axes1);
 
 
@@ -129,8 +134,8 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 % --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
+function makeLighterSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to makeLighterSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -139,8 +144,8 @@ function slider2_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
+function makeLighterSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to makeLighterSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -151,8 +156,8 @@ end
 
 
 % --- Executes on slider movement.
-function slider3_Callback(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
+function changeCorelationSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to changeCorelationSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -161,8 +166,8 @@ function slider3_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function slider3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
+function changeCorelationSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to changeCorelationSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -212,3 +217,47 @@ function pushbutton15_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton15 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on slider movement.
+function changeGradientSlider1_Callback(hObject, eventdata, handles)
+% hObject    handle to changeGradientSlider1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function changeGradientSlider1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to changeGradientSlider1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function changeGradientSlider2_Callback(hObject, eventdata, handles)
+% hObject    handle to changeGradientSlider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function changeGradientSlider2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to changeGradientSlider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
