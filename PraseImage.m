@@ -17,11 +17,12 @@ classdef PraseImage < handle
             obj.bin = false;
         end
         % reading image
-        function obj = readIm(obj)
-            obj.originalIm = double (imread('kaczki.jpg'))/255;
+        function obj = readIm(obj, path)
+            obj.originalIm = double (imread(path))/255;
             obj.currentIm = obj.originalIm;
             obj.lastOperation = 'o';
         end
+
         % changes the original image to black&white
         function obj = changeToBw(obj)
             obj.bwIm = rgb2gray(obj.originalIm);
