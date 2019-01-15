@@ -126,7 +126,7 @@ classdef PraseImage < handle
        %motion blur, in one direction blured, the other sharpen
        function obj = motionBlur(obj)
            if (obj.bw && obj.lastOperation == 'w')
-               f3 = [0,-1,0;-1,1,-1;0,-1,0];
+               f3 = [0,1,0;-1,1,-1;0,1,0];
                f3 = f3/sum(f3(:));
                obj.currentIm = imfilter (obj.currentIm,f3);
            end
