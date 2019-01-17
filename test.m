@@ -23,6 +23,20 @@ function test_OpeningFcn(hObject, eventdata, handles, varargin)
 
 handles.output = hObject;
 guidata(hObject, handles);
+set(handles.przywroc,'Enable','off');
+set(handles.changeToBwButton,'Enable','off');
+set(handles.gradientButton,'Enable','off');
+set(handles.makeLighterButton,'Enable','off');
+set(handles.changeContrastButton,'Enable','off');
+set(handles.changeCorelationButton,'Enable','off');
+set(handles.binOtsuButton,'Enable','off');
+set(handles.removeHighFreButton,'Enable','off');
+set(handles.removeLowFreButton,'Enable','off');
+set(handles.motionBlurButton,'Enable','off');
+set(handles.medfiltrButton,'Enable','off');
+set(handles.eroseButton,'Enable','off');
+set(handles.dilateButton,'Enable','off');
+set(handles.showEdgesButton,'Enable','off')
 
 
 function varargout = test_OutputFcn(hObject, eventdata, handles) 
@@ -47,6 +61,21 @@ object.readIm([p,f]);
 object2=object;
 imshow(object.currentIm,'Parent',handles.axes1);
 imshow(object.currentIm,'Parent',handles.axes2);
+imhist(object.currentIm);
+set(handles.przywroc,'Enable','on');
+set(handles.changeToBwButton,'Enable','on');
+set(handles.gradientButton,'Enable','on');
+set(handles.makeLighterButton,'Enable','off');
+set(handles.changeContrastButton,'Enable','off');
+set(handles.changeCorelationButton,'Enable','off');
+set(handles.binOtsuButton,'Enable','off');
+set(handles.removeHighFreButton,'Enable','off');
+set(handles.removeLowFreButton,'Enable','off');
+set(handles.motionBlurButton,'Enable','off');
+set(handles.medfiltrButton,'Enable','off');
+set(handles.eroseButton,'Enable','off');
+set(handles.dilateButton,'Enable','off');
+set(handles.showEdgesButton,'Enable','off');
 
 
 %metoda obs³uguj¹ca klawisz "makeLighter"
@@ -56,6 +85,7 @@ global object;
 sliderVal = get(handles.makeLighterSlider, 'Value');
 object.makeLighter(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
+imhist(object.currentIm);
 
 
 %metoda obs³uguj¹ca klawisz "changeContrast"ngeC
@@ -65,6 +95,7 @@ global object;
 sliderVal = get(handles.ChangeContrastSlider, 'Value');
 object.changeContrast(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
+imhist(object.currentIm);
 
 
 %metoda obs³uguj¹ca klawisz "changeCorelation"
@@ -74,7 +105,7 @@ global object;
 sliderVal = get(handles.changeCorelationSlider, 'Value');
 object.changeCorelation(sliderVal);
 imshow(object.currentIm,'Parent',handles.axes1);
-
+imhist(object.currentIm);
 
 %metoda obs³uguj¹ca klawisz "binOtsu"
 function binOtsuButton_Callback(hObject, eventdata, handles)
@@ -82,7 +113,18 @@ function binOtsuButton_Callback(hObject, eventdata, handles)
 global object;
 object.binOtsu();
 imshow(object.currentIm,'Parent',handles.axes1);
-
+imhist(object.currentIm);
+set(handles.makeLighterButton,'Enable','off');
+set(handles.changeContrastButton,'Enable','off');
+set(handles.changeCorelationButton,'Enable','off');
+set(handles.binOtsuButton,'Enable','on');
+set(handles.removeHighFreButton,'Enable','off');
+set(handles.removeLowFreButton,'Enable','off');
+set(handles.motionBlurButton,'Enable','off');
+set(handles.medfiltrButton,'Enable','off');
+set(handles.eroseButton,'Enable','on');
+set(handles.dilateButton,'Enable','on');
+set(handles.showEdgesButton,'Enable','on');
 
 %metoda obs³uguj¹ca klawisz "gradient"
 function gradientButton_Callback(hObject, eventdata, handles)
@@ -92,7 +134,7 @@ sliderVal1 = get(handles.changeGradientSlider1, 'Value');
 sliderVal2 = get(handles.changeGradientSlider2, 'Value');
 object.gradient(sliderVal1, sliderVal2);
 imshow(object.currentIm,'Parent',handles.axes1);
-
+imhist(object.currentIm);
 
 %metoda obs³uguj¹ca klawisz "changeToBw"
 function changeToBwButton_Callback(hObject, eventdata, handles)
@@ -100,30 +142,46 @@ function changeToBwButton_Callback(hObject, eventdata, handles)
 global object;
 object.changeToBw();
 imshow(object.currentIm,'Parent',handles.axes1);
+imhist(object.currentIm);
+set(handles.makeLighterButton,'Enable','on');
+set(handles.changeContrastButton,'Enable','on');
+set(handles.changeCorelationButton,'Enable','on');
+set(handles.binOtsuButton,'Enable','on');
+set(handles.removeHighFreButton,'Enable','on');
+set(handles.removeLowFreButton,'Enable','on');
+set(handles.motionBlurButton,'Enable','on');
+set(handles.medfiltrButton,'Enable','on');
+set(handles.eroseButton,'Enable','off');
+set(handles.dilateButton,'Enable','off');
+set(handles.showEdgesButton,'Enable','off');
 
 % metoda obs³uguj¹ca klawisz removeHighFreButton
 function removeHighFreButton_Callback(hObject, eventdata, handles)
     global object;
     object.removeHighFre();
     imshow(object.currentIm,'Parent',handles.axes1);
+    imhist(object.currentIm);
     
 % metoda obs³uguj¹ca klawisz removeLowFreButton
 function removeLowFreButton_Callback(hObject, eventdata, handles)
     global object;
     object.removeLowFre();
     imshow(object.currentIm,'Parent',handles.axes1);
-
+    imhist(object.currentIm);
+    
 % metoda obs³uguj¹ca klawisz motionBlur
 function motionBlurButton_Callback(hObject, eventdata, handles)
     global object;
     object.motionBlur();
     imshow(object.currentIm,'Parent',handles.axes1);
+    imhist(object.currentIm);
     
 % metoda obs³uguj¹ca klawisz modfiltr
 function medfiltrButton_Callback(hObject, eventdata, handles)
     global object;
     object.medfiltr();
     imshow(object.currentIm,'Parent',handles.axes1);
+    imhist(object.currentIm);
     
 % metoda obs³uguj¹ca klawisz erose
 function eroseButton_Callback(hObject, eventdata, handles)
@@ -132,6 +190,7 @@ function eroseButton_Callback(hObject, eventdata, handles)
     sliderVal = int8(sliderVal);
     object.erose(sliderVal);
     imshow(object.currentIm,'Parent',handles.axes1);
+    imhist(object.currentIm);
     
 % metoda obs³uguj¹ca klawisz dilate
 function dilateButton_Callback(hObject, eventdata, handles)
@@ -140,18 +199,33 @@ global object;
     sliderVal = int8(sliderVal);
     object.dilate(sliderVal);
     imshow(object.currentIm,'Parent',handles.axes1);
-
+    imhist(object.currentIm);
+    
 % metoda obs³uguj¹ca klawisz showEdges
 function showEdgesButton_Callback(hObject, eventdata, handles)
     global object;
     object.showEdges();
     imshow(object.currentIm,'Parent',handles.axes1);
- 
+    imhist(object.currentIm);
+    
 % metoda obs³uguj¹ca przywracanie obrazu do stanu pocz¹tkowego
 function przywroc_Callback(hObject, eventdata, handles)
 global object;
 object.setOriginal();
 imshow(object.currentIm,'Parent',handles.axes1);
+imhist(object.currentIm);
+set(handles.makeLighterButton,'Enable','off');
+set(handles.changeContrastButton,'Enable','off');
+set(handles.changeCorelationButton,'Enable','off');
+set(handles.binOtsuButton,'Enable','off');
+set(handles.removeHighFreButton,'Enable','off');
+set(handles.removeLowFreButton,'Enable','off');
+set(handles.motionBlurButton,'Enable','off');
+set(handles.medfiltrButton,'Enable','off');
+set(handles.eroseButton,'Enable','off');
+set(handles.dilateButton,'Enable','off');
+set(handles.showEdgesButton,'Enable','off');
+
 
 % metoda obs³uguj¹ca slider ChangeContrast
 function ChangeContrastSlider_Callback(hObject, eventdata, handles)

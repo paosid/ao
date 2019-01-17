@@ -107,7 +107,7 @@ classdef PraseImage < handle
             end
         end
         % eliminates noise through removing high frequency elements
-        function obj = removeHighFre(obj)
+        function obj = motionBlur(obj)
             if (obj.bw && obj.lastOperation == 'w')
                 f = ones(3);
                 f = f/sum(f(:));
@@ -124,7 +124,7 @@ classdef PraseImage < handle
            end
        end
        %motion blur, in one direction blured, the other sharpen
-       function obj = motionBlur(obj)
+       function obj = removeHighFre(obj)
            if (obj.bw && obj.lastOperation == 'w')
                f3 = [0,1,0;-1,1,-1;0,1,0];
                f3 = f3/sum(f3(:));
