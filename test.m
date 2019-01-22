@@ -88,7 +88,7 @@ imshow(object.currentIm,'Parent',handles.axes1);
 imhist(object.currentIm);
 
 
-%metoda obs³uguj¹ca klawisz "changeContrast"ngeC
+%metoda obs³uguj¹ca klawisz "changeContrast"
 function changeContrastButton_Callback(hObject, eventdata, handles)
 
 global object;
@@ -136,6 +136,7 @@ object.gradient(sliderVal1, sliderVal2);
 imshow(object.currentIm,'Parent',handles.axes1);
 imhist(object.currentIm);
 
+
 %metoda obs³uguj¹ca klawisz "changeToBw"
 function changeToBwButton_Callback(hObject, eventdata, handles)
  
@@ -168,6 +169,7 @@ function removeLowFreButton_Callback(hObject, eventdata, handles)
     object.removeLowFre();
     imshow(object.currentIm,'Parent',handles.axes1);
     imhist(object.currentIm);
+
     
 % metoda obs³uguj¹ca klawisz motionBlur
 function motionBlurButton_Callback(hObject, eventdata, handles)
